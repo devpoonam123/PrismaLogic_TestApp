@@ -1026,6 +1026,7 @@
     <Content Include="Kendo\js\kendo.all.min.js" />
     <Content Include="Kendo\js\kendo.angular.min.js" />
     <Content Include="Kendo\js\kendo.appbar.min.js" />
+    <Content Include="Kendo\js\kendo.aspnetmvc.min.js" />
     <Content Include="Kendo\js\kendo.autocomplete.min.js" />
     <Content Include="Kendo\js\kendo.badge.min.js" />
     <Content Include="Kendo\js\kendo.binder.min.js" />
@@ -2774,6 +2775,7 @@
     <Content Include="Models\PrismaLogicModel.edmx.diagram">
       <DependentUpon>PrismaLogicModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Kendo\js\kendo.aspnetmvc.min.js.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

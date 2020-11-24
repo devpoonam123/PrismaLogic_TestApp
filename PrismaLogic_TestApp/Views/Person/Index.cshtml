@@ -5,18 +5,11 @@
 
 <div class="container">
     <div class="row">
+        <div id="grid1"></div>
 
-        @*@(Html.Kendo().Grid<PrismaLogic_TestApp.Models.Person>()
-            .Name("EmpGrid")
-            .DataSource(dataSource => dataSource
-                .Ajax()
-
-                .Read(read => read.Action("Index1", "Person"))
-                )
-                )*@
 
         @(Html.Kendo().Grid<PrismaLogic_TestApp.Models.Person>()
-        .Name("grid")
+        .Name("personGrid")
         .Columns(columns =>
         {
             columns.Bound(c => c.FirstName).Width(140);
@@ -26,17 +19,20 @@
         })
         .DataSource(dataSource => dataSource
             .Ajax()
+            .ServerOperation(false)
+
             .Read(read => read.Action("Index1", "Person"))
             .Update(u => u.Action("Update", "Person"))
             .Destroy(d => d.Action("Delete", "Person"))
             .Create(c => c.Action("Create", "Person"))
             .PageSize(2)
             .Model(m => { m.Id(p => p.Id); })
+
         ).Pageable()
         .Sortable()
-        .Filterable()
+        .Filterable(filtering => filtering.Enabled(true))
         .Groupable()
-        .Editable(m=>m.Mode(GridEditMode.PopUp))
+        .Editable(m=>m.Mode(GridEditMode.InLine))
         .ToolBar(t=>t.Create())
     )
     </div>
