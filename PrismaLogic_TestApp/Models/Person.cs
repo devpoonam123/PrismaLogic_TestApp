@@ -11,12 +11,18 @@ namespace PrismaLogic_TestApp.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Person
     {
+        [Required]
         public string FirstName { get; set; }
+        [Required]
         public string LastName { get; set; }
+        [Required]
         public string Country { get; set; }
+
+        [ScaffoldColumn(false)]
         public int Id { get; set; }
     }
 }

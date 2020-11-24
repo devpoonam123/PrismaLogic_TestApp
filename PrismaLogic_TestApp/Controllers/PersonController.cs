@@ -29,7 +29,7 @@ namespace PrismaLogic_TestApp.Controllers
             persons = _mycontext.People.ToList();
             DataSourceResult result = persons.ToDataSourceResult(request);
 
-            return Json(result, JsonRequestBehavior.AllowGet);
+            return Json(result);
         }
 
         public ActionResult Update([DataSourceRequest] DataSourceRequest request, Person person)
@@ -38,13 +38,13 @@ namespace PrismaLogic_TestApp.Controllers
             {
               var perToupdate=  _mycontext.People.SingleOrDefault(m => m.Id.Equals(person.Id));
 
-                perToupdate.FirstName = person.FirstName;
-                perToupdate.LastName = person.LastName;
-                perToupdate.Country = person.Country;
+                perToupdate.FirstName = person.FirstName.Trim();
+                perToupdate.LastName = person.LastName.Trim();
+                perToupdate.Country = person.Country.Trim();
 
                 _mycontext.SaveChanges();
             }
-            return Json( JsonRequestBehavior.AllowGet);
+            return Json(ModelState.IsValid ? true : ModelState.ToDataSourceResult());
         }
 
         public ActionResult Delete([DataSourceRequest] DataSourceRequest request, Person person)
@@ -55,22 +55,25 @@ namespace PrismaLogic_TestApp.Controllers
                 _mycontext.People.Remove(deletedper);
                 _mycontext.SaveChanges();
             }
-            return Json(JsonRequestBehavior.AllowGet);
+            return Json(ModelState.IsValid?true:ModelState.ToDataSourceResult());
         }
 
-
+        
         public ActionResult Create([DataSourceRequest] DataSourceRequest request, Person person)
         {
-            
             if (person != null)
             {
-                _mycontext.People.Add(person);
+                var tempPerson = new Person
+                {
+                    FirstName = person.FirstName.Trim(),
+                    LastName = person.LastName.Trim(),
+                    Country = person.Country.Trim()
+                };
+                _mycontext.People.Add(tempPerson);
                 _mycontext.SaveChanges();
             }
 
-            return Json(JsonRequestBehavior.AllowGet);
+            return Json(ModelState.IsValid ? true : ModelState.ToDataSourceResult());
         }
-
-
     }
 }

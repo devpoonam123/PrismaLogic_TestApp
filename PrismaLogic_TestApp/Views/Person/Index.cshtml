@@ -12,26 +12,24 @@
         .Name("personGrid")
         .Columns(columns =>
         {
-            columns.Bound(c => c.FirstName).Width(140);
-            columns.Bound(c => c.LastName).Width(190);
+            columns.Bound(c => c.FirstName);
+            columns.Bound(c => c.LastName);
             columns.Bound(c => c.Country);
             columns.Command(c => { c.Edit(); c.Destroy(); });
         })
         .DataSource(dataSource => dataSource
             .Ajax()
-            .ServerOperation(false)
-
             .Read(read => read.Action("Index1", "Person"))
             .Update(u => u.Action("Update", "Person"))
             .Destroy(d => d.Action("Delete", "Person"))
             .Create(c => c.Action("Create", "Person"))
-            .PageSize(2)
+            .PageSize(5)
             .Model(m => { m.Id(p => p.Id); })
+            
 
         ).Pageable()
         .Sortable()
         .Filterable(filtering => filtering.Enabled(true))
-        .Groupable()
         .Editable(m=>m.Mode(GridEditMode.InLine))
         .ToolBar(t=>t.Create())
     )
